@@ -13,6 +13,23 @@ sudo chmod a+rw /dev/ttyUSB0
 
 Luego se pueden bajar los códigos.
 
+# Serial print
+
+Para ver cosas en la compu y debbugear se puede usar el serial para hacer
+print por ejemplo.
+
+Primero se debe inicializar el puerto:
+
+Serial.begin(9600);
+
+Luego se pueden hacer prints:
+
+Serial.println("Debo girar!"); --> printea el string
+Serial.println(isObstacle); --> printea el valor de la variable isObstacle
+
+Para ver los prints se abre la consola:
+Herramientas -> Monitor Serie
+
 # Conexiones stepper motor
 
 El motor que usamos es el 28byj-48
