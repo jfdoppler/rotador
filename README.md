@@ -9,6 +9,7 @@ intentar hacerlo: can't open device ... ) hay que correr las siguientes lineas
 por linea de comandos:
 
 sudo usermod -a -G dialout $USER
+
 sudo chmod a+rw /dev/ttyUSB0
 
 Luego se pueden bajar los códigos.
@@ -25,9 +26,11 @@ Serial.begin(9600);
 Luego se pueden hacer prints:
 
 Serial.println("Debo girar!"); --> printea el string
+
 Serial.println(isObstacle); --> printea el valor de la variable isObstacle
 
 Para ver los prints se abre la consola:
+
 Herramientas -> Monitor Serie
 
 # Conexiones stepper motor
@@ -38,13 +41,19 @@ El stepper motor se inicializa/configura/controla con las lineas iniciales
 de los codigos:
 
 #include <Stepper.h> --> libreria
+
 const int stepsPerRevolution = 2048; --> de la datasheet
+
 Stepper myStepper(stepsPerRevolution, 8, 9, 10, 11); --> configuracion de conexion
 
 Las conexiones de la placa del motor se hacen de la siguiente forma:
+
 IN1 -> 8
+
 IN2 -> 10
+
 IN3 -> 9
+
 IN4 -> 11
 
 Tal vez podrian conectarse IN2 e IN3 al reves cambiando la linea de configuracion?
@@ -52,6 +61,7 @@ Tal vez podrian conectarse IN2 e IN3 al reves cambiando la linea de configuracio
 # Velocidad del motor
 
 Puede configurarse la velocidad de rotacion del motor:
+
 myStepper.setSpeed(15); --> velocidad de rotacion en RPM
 
 Probando encontramos que hasta 15 anda bien, con 20 ya no funciona. No encontramos
