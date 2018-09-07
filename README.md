@@ -53,3 +53,8 @@ El sensor mide el tiempo entre la emision de un pulso ultrasonico (trigger) y la
 deteccion (echo). Para emitir se le manda un pulso de 10us al pin trigger.
 Luego se mide la duracion del pulso en echo y esto es proporcional a la distancia.
 
+# Sensor de obstaculos
+
+El sensor detecta si hay un obstaculo dentro de un rango determinado
+El rango de deteccion puede controlarse con un potenciometro que ya 
+viene incorporado.
