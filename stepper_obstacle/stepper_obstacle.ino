@@ -49,15 +49,11 @@ void loop() {
 //  myStepper.setSpeed(motorSpeed);
 //  myStepper.step(stepsPerRevolution/32);
   isObstacle = digitalRead(isObstaclePin);
-  if (isObstacle == LOW)
-  {
-    Serial.println("OBSTACLE!!, OBSTACLE!!");
+  while (isObstacle == HIGH) {
+    Serial.println("Debo girar!");
     digitalWrite(LED, HIGH);
+    myStepper.step(10);
+    isObstacle = digitalRead(isObstaclePin);
   }
-  else
-  {
-    Serial.println("clear");
-    digitalWrite(LED, LOW);
-  }
-  delay(200);
+  Serial.println("Mi tarea esta cumplida!");
 }
