@@ -3,6 +3,8 @@
 
 const int stepsPerRevolution = 2048;  // change this to fit the number of steps per revolution
 // for your motor
+const int ratioPeq = 15;
+const int ratioGde = 96;
 
 // initialize the stepper library on pins 8 through 11:
 Stepper myStepper(stepsPerRevolution, 8, 9, 10, 11);
@@ -20,6 +22,7 @@ int current_position = 0;
 int valor1;
 int valor2;
 int valor3;
+int signo;
 int steps = 0;
 
 void setup() {
@@ -45,7 +48,11 @@ void loop() {
   if (previous_position==0){
     previous_position = current_position;
   } else {
-    steps = (current_position-previous_position)*stepsPerRevolution/3;
+    signo = current_position-previous_position;
+    if (abs(signo)>1){
+      signo = signo/-2;
+    }
+    steps = signo*stepsPerRevolution/3*(ratioGde/ratioPeq);
     previous_position = current_position;
     myStepper.step(steps);
   }
