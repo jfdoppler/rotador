@@ -85,3 +85,10 @@ Luego se mide la duracion del pulso en echo y esto es proporcional a la distanci
 El sensor detecta si hay un obstaculo dentro de un rango determinado
 El rango de deteccion puede controlarse con un potenciometro que ya 
 viene incorporado.
+
+# Sensores hall
+
+Los sensores hall se alimentan con la Vcc de 5V de la placa. Entregan
+una señal analógica proporcional al campo magnetico. Los usamos para
+detectar la posicion de imanes. Para leerlos se usa el comando
+analogRead, y el pin al que se conectan debe configurarse como INPUT.
