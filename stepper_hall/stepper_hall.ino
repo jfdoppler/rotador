@@ -5,6 +5,8 @@ const int stepsPerRevolution = 2048;  // change this to fit the number of steps 
 // for your motor
 const int ratioPeq = 15;
 const int ratioGde = 96;
+// 1/3 vuelta = 4369 pasos = 8 segundos
+const int pasos_por_it = 100;
 
 // initialize the stepper library on pins 8 through 11:
 Stepper myStepper(stepsPerRevolution, 8, 9, 10, 11);
@@ -24,6 +26,7 @@ int valor2;
 int valor3;
 int signo;
 int steps = 0;
+int buffer_pasos = 0;
 
 void setup() {
   Serial.begin(300);
@@ -35,15 +38,29 @@ void setup() {
 }
 
 void loop() {
+  if (abs(buffer_pasos)>pasos_por_it){
+    if (buffer_pasos>0){
+      myStepper.step(pasos_por_it);
+      buffer_pasos = buffer_pasos - pasos_por_it;
+    } else {
+      myStepper.step(-pasos_por_it);
+      buffer_pasos = buffer_pasos + pasos_por_it;
+    }
+    digitalWrite(LED, LOW);
+  }
+  
   valor1 = analogRead(hall1);
   valor2 = analogRead(hall2);
   valor3 = analogRead(hall3);
   if (valor1 > 600){
     current_position = 1;
+    digitalWrite(LED, HIGH);
   } else if (valor2 > 600){
     current_position = 2;
+    digitalWrite(LED, HIGH);
   } else if (valor3 > 600){
     current_position = 3;
+    digitalWrite(LED, HIGH);
   }
   if (previous_position==0){
     previous_position = current_position;
@@ -54,6 +71,6 @@ void loop() {
     }
     steps = signo*stepsPerRevolution/3*(ratioGde/ratioPeq);
     previous_position = current_position;
-    myStepper.step(steps);
+    buffer_pasos = buffer_pasos + steps;
   }
 }
